@@ -1,0 +1,177 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="500" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="CalculatorButton">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="MinWidth" Value="40" />
+            <Setter Property="MinHeight" Value="40" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" VerticalAlignment="Center">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Вид" />
+                <MenuItem Header="Правка" />
+                <MenuItem Header="Справка" />
+            </Menu>
+        </DockPanel>
+        <Border Margin="15" Grid.ColumnSpan="10" Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="2">
+            <StackPanel>
+                <TextBlock TextAlignment="Right" VerticalAlignment="Center" Padding="5" FontSize="12"
+                           x:Name="ExpressionTb" />
+                <TextBlock TextAlignment="Right" VerticalAlignment="Center" Text="0" Padding="5" FontSize="24"
+                           x:Name="ScreenTb" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Margin="5" BorderThickness="2" BorderBrush="Black">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal"
+                        x:Name="Radios">
+                <RadioButton Content="Градусы" IsChecked="True" GroupName="Meterings" Checked="ToggleButton_OnChecked" />
+                <RadioButton Content="Радианы" GroupName="Meterings" Checked="ToggleButton_OnChecked" />
+                <RadioButton Content="Грады" GroupName="Meterings" IsEnabled="False" />
+            </StackPanel>
+        </Border>
+
+        <Button Style="{StaticResource CalculatorButton}" Content="" IsEnabled="False" Grid.Row="3" Grid.Column="0" />
+        <Button Style="{StaticResource CalculatorButton}" Content="Inv" Grid.Row="3" Grid.Column="1"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="ln" Grid.Row="3" Grid.Column="2"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="(" Grid.Row="3" Grid.Column="3"
+                Click="BraceButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content=")" Grid.Row="3" Grid.Column="4"
+                Click="BraceButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="Int" Grid.Row="4" Grid.Column="0"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="sinh" Grid.Row="4" Grid.Column="1"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="sin" Grid.Row="4" Grid.Column="2"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="x²" Grid.Row="4" Grid.Column="3"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="n!" Grid.Row="4" Grid.Column="4"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="dms" Grid.Row="5" Grid.Column="0" />
+        <Button Style="{StaticResource CalculatorButton}" Content="cosh" Grid.Row="5" Grid.Column="1"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="cos" Grid.Row="5" Grid.Column="2"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="xʸ" Grid.Row="5" Grid.Column="3"
+                Click="OperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="sqyX" Grid.Row="5" Grid.Column="4"
+                Click="OperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="π" Grid.Row="6" Grid.Column="0"
+                Click="PiButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="tanh" Grid.Row="6" Grid.Column="1"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="tan" Grid.Row="6" Grid.Column="2"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="x³" Grid.Row="6" Grid.Column="3"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="sq3X" Grid.Row="6" Grid.Column="4"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="F-E" Grid.Row="7" Grid.Column="0" />
+        <Button Style="{StaticResource CalculatorButton}" Content="Exp" Grid.Row="7" Grid.Column="1"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="Mod" Grid.Row="7" Grid.Column="2"
+                Click="OperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="log" Grid.Row="7" Grid.Column="3"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="10ˣ" Grid.Row="7" Grid.Column="4"
+                Click="UnaryOperationButton_Click" />
+
+        <Button Style="{StaticResource CalculatorButton}" Content="MC" Grid.Row="2" Grid.Column="5"
+                Click="MemoryButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="MR" Grid.Row="2" Grid.Column="6"
+                Click="MemoryButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="MS" Grid.Row="2" Grid.Column="7"
+                Click="MemoryButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="M+" Grid.Row="2" Grid.Column="8"
+                Click="MemoryButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="M-" Grid.Row="2" Grid.Column="9"
+                Click="MemoryButton_Click" />
+
+        <Button Style="{StaticResource CalculatorButton}" Content="&lt;--" Grid.Row="3" Grid.Column="5"
+                Click="DeleteSymbolButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="CE" Grid.Row="3" Grid.Column="6"
+                Click="ClearButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="C" Grid.Row="3" Grid.Column="7"
+                Click="ClearButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="+-" Grid.Row="3" Grid.Column="8"
+                Click="UnaryOperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="sqrt" Grid.Row="3" Grid.Column="9"
+                Click="UnaryOperationButton_Click" />
+
+        <Button Style="{StaticResource CalculatorButton}" Content="7" Grid.Row="4" Grid.Column="5"
+                Click="NumberButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="8" Grid.Row="4" Grid.Column="6"
+                Click="NumberButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="9" Grid.Row="4" Grid.Column="7"
+                Click="NumberButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="/" Grid.Row="4" Grid.Column="8"
+                Click="OperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="%" Grid.Row="4" Grid.Column="9"
+                Click="OperationButton_Click" />
+
+        <Button Style="{StaticResource CalculatorButton}" Content="4" Grid.Row="5" Grid.Column="5"
+                Click="NumberButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="5" Grid.Row="5" Grid.Column="6"
+                Click="NumberButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="6" Grid.Row="5" Grid.Column="7"
+                Click="NumberButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="*" Grid.Row="5" Grid.Column="8"
+                Click="OperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="1/x" Grid.Row="5" Grid.Column="9"
+                Click="UnaryOperationButton_Click" />
+
+        <Button Style="{StaticResource CalculatorButton}" Content="1" Grid.Row="6" Grid.Column="5"
+                Click="NumberButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="2" Grid.Row="6" Grid.Column="6"
+                Click="NumberButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="3" Grid.Row="6" Grid.Column="7"
+                Click="NumberButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="-" Grid.Row="6" Grid.Column="8"
+                Click="OperationButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="=" Height="80" Grid.Row="6" Grid.Column="9"
+                Grid.RowSpan="2" Click="EqualsButton_Click" />
+
+        <Button Style="{StaticResource CalculatorButton}" Content="0" Grid.Row="7" Grid.Column="5" Grid.ColumnSpan="2"
+                Click="NumberButton_Click" Width="80" />
+        <Button Style="{StaticResource CalculatorButton}" Content="," Grid.Row="7" Grid.Column="7"
+                Click="DotButton_Click" />
+        <Button Style="{StaticResource CalculatorButton}" Content="+" Grid.Row="7" Grid.Column="8"
+                Click="OperationButton_Click" />
+    </Grid>
+</Window>
